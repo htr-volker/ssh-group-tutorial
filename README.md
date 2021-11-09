@@ -114,3 +114,27 @@ exit
 ```
 
 Now, go see the message your friend has left for you! Remember that the message will be create under the user you made for your friend, so you may have to switch back to that user to see it.
+
+## Stretch Goal
+
+Now, attempt to create a file structure in the following configuration on your friend's VM via SSH:
+
+```text
+my-cool-folder
+├── dir1
+│   ├── file1
+│   ├── file2
+│   └── file3
+├── dir2
+│   ├── file1
+│   ├── file2
+│   └── file3
+└── dir3
+    ├── file1
+    ├── file2
+    └── file3
+```
+
+But you must do so using either a heredoc or script, such that you create the file structure with only one command!
+
+Hint: check the [SSH Commands](https://qa-community.co.uk/~/_/learning/dfecloud-linux-intermediate/linux--openssh#ssh-commands) section under the OpenSSH module on Community.
