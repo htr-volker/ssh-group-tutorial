@@ -4,9 +4,13 @@ In this quick little tutorial, you will:
 - SSH into a friend's virtual machine
 - Leave a nice message on their file system for them to read
 
-## Create an SSH key pair
+Firstly, in your pairs, decide who is going to be the **messenger** and who is going to be the **receiver**. The messenger will be the one leaving the message on their VM, and the receiver will be the one who gets the message on their VM.
 
-The first thing each of you will need to do is generate a fresh SSH key pair.
+Don't worry, you'll be swapping roles at the end!
+
+## (Messenger) Create an SSH key pair
+
+The first thing the messenger should do is generate a fresh SSH key pair.
 
 You will use this key pair to authenticate yourselves to access your friend's virtual machine.
 
@@ -67,9 +71,9 @@ cat ~/.ssh/my-new-key.pub
 
 Copy and paste this to a notepad for later.
 
-## Create a user on your VM
+## (Receiver) Create a user on your VM
 
-Next, we want to create a user on your VM for your friend to connect as via SSH.
+Next, we want to create a user on your VM for the messenger to connect to via SSH.
 
 Run this command to create the user, replacing `<username>` with your friend's name:
 
@@ -83,11 +87,24 @@ Now, log in as this user:
 sudo su - <username>
 ```
 
-To allow your friend to log in as this user on your machine, you need to paste the contents of *their* `my-new-key.pub` (their public key) file.
+To allow your friend to log in as this user on your machine, you need to save the contents of *their* `my-new-key.pub` (their public key) file into the `.ssh/authorized_keys` file.
 
-Ask them to send their public key to you. Then, open the file `~/.ssh/authorized_keys` in a text editor of your choice and paste their public key in that file.
+We need to create the `.ssh` folder and the `authorized_keys` file under this user:
 
-## SSH into your friend's VM
+```bash
+mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+```
+
+Ask them to send their public key to you. Then, open the file `~/.ssh/authorized_keys` in `nano` (you can use `vim` if you prefer):
+
+```bash
+nano ~/.ssh/authorized_keys
+```
+
+Then paste their public key in that file.
+
+## (Messenger) SSH into your friend's VM
 
 Finally, let's SSH into your friend's VM.
 
@@ -113,7 +130,9 @@ When you're done, log out of their machine by entering:
 exit
 ```
 
-Now, go see the message your friend has left for you! Remember that the message will be create under the user you made for your friend, so you may have to switch back to that user to see it.
+Now, the receiver can go look at the message on their VM! Remember that the message will be create under the user you made for your friend, so you may have to switch back to that user to see it.
+
+Once you've read the message, swap roles and do it again!
 
 ## Stretch Goal
 
